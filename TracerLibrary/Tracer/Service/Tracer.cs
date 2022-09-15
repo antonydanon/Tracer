@@ -19,6 +19,11 @@ namespace TracerLibrary.Tracer.Service
         
         public void StopTrace()
         {
+            var threadId = Thread.CurrentThread.ManagedThreadId;
+            if (_threads.TryGetValue(threadId, out var thread))
+            {
+                thread.StopTrace();
+            }
         }
         
         public TraceResult GetTraceResult()

@@ -25,5 +25,21 @@ namespace TracerLibrary.Tracer.Service
             
             _stopwatch.Start();
         }
+        
+        public void StopTrace()
+        {
+            _stopwatch.Stop();
+            _information.Time = _stopwatch.ElapsedMilliseconds; 
+        }
+
+        public MethodInformation GetTraceResult()
+        {
+            return _information;
+        }
+        
+        public void AddMethodInformation(MethodInformation information)
+        {
+            _information.InnerMethods.Add(information);
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace TracerLibrary.Tracer.Model
 
         public long Time { get; internal set; }
 
-        private List<MethodInformation> Methods { get;  set; }
+        public List<MethodInformation> Methods { get;  internal set; }
     }
 }
