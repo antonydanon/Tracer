@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using TracerLibrary.Serialization.JsonSerializer.Model;
 using TracerLibrary.Tracer.Model;
 
 namespace TracerLibrary.Serialization.JsonSerializer
@@ -8,7 +9,8 @@ namespace TracerLibrary.Serialization.JsonSerializer
     {
         public void Serialize(TraceResult traceResult, Stream to)
         {
-            var res = System.Text.Json.JsonSerializer.Serialize(traceResult);
+            var model = new TraceResultOutput(traceResult);
+            var res = System.Text.Json.JsonSerializer.Serialize(model);
             to.Write(Encoding.Default.GetBytes(res));
         }
     }
