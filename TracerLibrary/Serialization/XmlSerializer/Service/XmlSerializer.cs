@@ -2,7 +2,7 @@
 using TracerLibrary.Serialization.XmlSerializer.Model;
 using TracerLibrary.Tracer.Model;
 
-namespace TracerLibrary.Serialization.XmlSerializer
+namespace TracerLibrary.Serialization.XmlSerializer.Service
 {
     public class XmlSerializer : ISerializer
     {

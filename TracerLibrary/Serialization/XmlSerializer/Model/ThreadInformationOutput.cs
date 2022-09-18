@@ -11,6 +11,11 @@ namespace TracerLibrary.Serialization.XmlSerializer.Model
 
         public List<MethodInformationOutput> Methods { get; set; }
 
+        public ThreadInformationOutput()
+        {
+            
+        }
+
         public ThreadInformationOutput(ThreadInformation thread)
         {
             Id = thread.Id;

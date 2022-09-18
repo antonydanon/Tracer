@@ -3,7 +3,7 @@ using System.Text;
 using TracerLibrary.Serialization.JsonSerializer.Model;
 using TracerLibrary.Tracer.Model;
 
-namespace TracerLibrary.Serialization.JsonSerializer
+namespace TracerLibrary.Serialization.JsonSerializer.Service
 {
     public class JsonSerializer : ISerializer
     {
