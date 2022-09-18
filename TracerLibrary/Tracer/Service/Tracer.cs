@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using TracerLibrary.Tracer.Model;
 
@@ -28,7 +29,12 @@ namespace TracerLibrary.Tracer.Service
         
         public TraceResult GetTraceResult()
         {
-            return new TraceResult();
+            var threads = _threads
+                            .Select(p => p.Value.GetTraceResult())
+                            .ToList();
+            
+            var traceResult = new TraceResult(threads);
+            return traceResult;
         }
     }
 }
