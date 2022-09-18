@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Serialization\JsonSerializer" />
       <Folder Include="Serialization\XmlSerializer" />
     </ItemGroup>
 
