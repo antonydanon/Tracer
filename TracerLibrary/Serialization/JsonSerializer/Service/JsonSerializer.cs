@@ -7,11 +7,11 @@ namespace TracerLibrary.Serialization.JsonSerializer.Service
 {
     public class JsonSerializer : ISerializer
     {
-        public void Serialize(TraceResult traceResult, Stream to)
+        public StringWriter Serialize(TraceResult traceResult)
         {
             var model = new TraceResultOutput(traceResult);
             var res = System.Text.Json.JsonSerializer.Serialize(model);
-            to.Write(Encoding.Default.GetBytes(res));
+            return new StringWriter(new StringBuilder(res));
         }
     }
 }

@@ -1,14 +1,22 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TracerLibrary.Serialization;
 using TracerLibrary.Serialization.JsonSerializer.Service;
 using TracerLibrary.Serialization.XmlSerializer.Service;
+using TracerLibrary.Tracer.Model;
 using TracerLibrary.Tracer.Service;
+using TracerLibrary.Writer;
 
 namespace TracerConsoleApp
 {
-    public static class Program
+    public class Program
     {
-        private static void Main()
+        public static void Main()
+        {
+            var program = new Program();
+            program.WriteData(program.TracerWork());
+        }
+        
+        private TraceResult TracerWork()
         {
             var tracer = new Tracer();
             var foo = new Foo(tracer);
@@ -16,15 +24,24 @@ namespace TracerConsoleApp
             foo.MyMethod();
             foo.MyMethod();
             task.Wait();
-            var result = tracer.GetTraceResult();
+            return tracer.GetTraceResult();    
+        }
 
-            var jsonSerializer = new JsonSerializer();
-            using var jsonFileStream = new FileStream("result.json", FileMode.Create);
-            jsonSerializer.Serialize(result, jsonFileStream);
+        private void WriteData(TraceResult traceResult)
+        {
+            IWriter consoleWriter = new ConsoleWriter();
+            IWriter fileWriter = new FileWriter();
             
-            var xmlSerializer = new XmlSerializer();
-            using var xmlFileStream = new FileStream("result.xml", FileMode.Create);
-            xmlSerializer.Serialize(result, xmlFileStream);
+            ISerializer jsonSerializer = new JsonSerializer();
+            var jsonStringWriter = jsonSerializer.Serialize(traceResult);
+
+            ISerializer xmlSerializer = new XmlSerializer();
+            var xmlStringWriter = xmlSerializer.Serialize(traceResult);
+            
+            consoleWriter.Write(jsonStringWriter);
+            fileWriter.Write(jsonStringWriter);   
+            
+            consoleWriter.Write(xmlStringWriter);
         }
     }
 }

@@ -5,6 +5,6 @@ namespace TracerLibrary.Serialization
 {
     public interface ISerializer
     {
-        void Serialize(TraceResult traceResult, Stream to);    
+        StringWriter Serialize(TraceResult traceResult);    
     }
 }
